@@ -1,23 +1,23 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: postgres-service-deployment
+  name: spring-service-deployment
   labels:
-    app: postgres-service
+    app: spring-service
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: postgres-service
+      app: spring-service
   template:
     metadata:
       labels:
-        app: postgres-service
+        app: spring-service
     spec:
       containers:
         - env: 
-          name: postgres-service
-          image: "192.168.34.62:8082/postgres:2.0"
+          name: spring-service
+          image: "192.168.34.62:8082/spring:2.0"
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8080
@@ -28,9 +28,9 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: postgres-service-svc
+  name: spring-service-svc
   labels:
-    app: postgres-service
+    app: spring-service
 spec:
   ports:
     - name: "8080"
@@ -40,4 +40,4 @@ spec:
       port: 8000
       targetPort: 8000
   selector:
-    app: postgres-service
+    app: spring-service
