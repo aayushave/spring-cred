@@ -15,8 +15,7 @@ spec:
         app: spring-service
     spec:
       containers:
-        - env: 
-          name: spring-service
+        - name: spring-service
           image: "192.168.34.62:8082/spring:2.0"
           imagePullPolicy: IfNotPresent
           ports:
