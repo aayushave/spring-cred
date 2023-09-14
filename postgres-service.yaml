@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgres-service-deployment
+  labels:
+    app: postgres-db-deployment
+spec:
+  strategy:
+   rollingUpdate:
+     maxSurge: 1
+     maxUnavailable: 1
+   type: RollingUpdate
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgres-db
+  template:
+    metadata:
+      labels:
+        app: postgres-db
+    spec:
+      containers:
+      - name: postgres
+        image: postgres:15-alpine
+        imagePullPolicy: IfNotPresent
+        env:
+        - name: POSTGRES_PASSWORD
+          value: postgres
+        - name: POSTGRES_DB
+          value: postgres
+        - name: POSTGRES_USER
+          value: postgres
+        ports:
+        - containerPort: 5432
+          name: postgres
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres-service-svc
+  labels:
+    app: postgres-db-service
+spec:
+  ports:
+  - port: 5432
+    protocol: TCP
+  selector:
+    app: postgres-db   
+
