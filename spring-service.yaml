@@ -23,7 +23,7 @@ spec:
             - name: SPRING_DATASOURCE_URL
               value: jdbc:postgresql://postgres-service-svc:5432/postgres
           name: spring-service
-          image: "192.168.34.62:8081/ems"
+          image: "192.168.34.62:8080/ems"
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8080
