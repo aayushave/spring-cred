@@ -8,6 +8,6 @@ IF "%~1"=="dev" (
   echo "====================================================================="
 ) ELSE (
   echo "Usage: %~0 | Provide NAMESPACE_NAME Name {dev|prod|qa}"
-  exit "1"
+  EXIT /b 1
 )
 exit "0"
