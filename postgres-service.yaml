@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: postgres-service-deployment
   labels:
-    app: postgres-db-deployment
+    app: postgres-db
 spec:
   strategy:
    rollingUpdate:
