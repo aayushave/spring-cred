@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgres-service-deployment
+  labels:
+    app: postgres-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgres-service
+  template:
+    metadata:
+      labels:
+        app: postgres-service
+    spec:
+      containers:
+        name: postgres-service
+          image: 192.168.34.62:8082/postgres:2.0
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8080
+            - containerPort: 8000
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres-service-svc
+  labels:
+    app: postgres-service
+spec:
+  ports:
+    - name: "8080"
+      port: 8080
+      targetPort: 8080
+    - name: "8000"
+      port: 8000
+      targetPort: 8000
+  selector:
+    app: postgres-service
